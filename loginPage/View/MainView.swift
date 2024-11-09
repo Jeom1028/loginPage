@@ -8,13 +8,30 @@
 import UIKit
 import SnapKit
 
-class StartPageView: UIView {
+class MainView: UIView {
     
-    let startButton: UIButton = {
+    let mainLabel: UILabel = {
+        let label = UILabel()
+        label.text = "님 환영합니다"
+        label.font = UIFont.boldSystemFont(ofSize: 40)
+        label.textColor = .white
+        return label
+    }()
+    
+    let logOutButton: UIButton = {
         let button = UIButton()
-        button.setTitle("시작하기", for: .normal)
+        button.setTitle("로그아웃", for: .normal)
+        button.backgroundColor = .lightGray
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.layer.cornerRadius = 10
+        return button
+    }()
+    
+    let userDeleteButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("회원탈퇴", for: .normal)
         button.backgroundColor = .red
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 40)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.layer.cornerRadius = 10
         return button
     }()
@@ -30,15 +47,26 @@ class StartPageView: UIView {
     }
     
     private func setupView() {
-        addSubview(startButton)
+        [mainLabel, logOutButton, userDeleteButton].forEach { self.addSubview($0)}
     }
     
     private func setupConstraints() {
-        startButton.snp.makeConstraints { make in
-            make.width.equalTo(160)
-            make.height.equalTo(80)
+        
+        mainLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(200)
+        }
+        
+        logOutButton.snp.makeConstraints { make in
+            make.height.equalTo(40)
+            make.leading.trailing.equalToSuperview().inset(24)
+            make.top.equalTo(mainLabel.snp.bottom).offset(160)
+        }
+        
+        userDeleteButton.snp.makeConstraints { make in
+            make.height.equalTo(40)
+            make.leading.trailing.equalToSuperview().inset(24)
+            make.top.equalTo(logOutButton.snp.bottom).offset(16)
         }
     }
 }

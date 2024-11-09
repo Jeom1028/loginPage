@@ -10,7 +10,11 @@ import SnapKit
 
 class MainViewController: UIViewController {
     
+    private var mainView: MainView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        mainView = MainView(frame: view.bounds)
+        view = mainView
     }
 }
