@@ -11,10 +11,18 @@ import SnapKit
 class MainViewController: UIViewController {
     
     private var mainView: MainView!
+    var loggedInUserName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainView = MainView(frame: view.bounds)
+        
+        if loggedInUserName == nil {
+            let users = CoreDataManager.shared.fetchUsers()
+            loggedInUserName = users.first?.name ?? "사용자"
+        }
+        
+        mainView = MainView(frame: view.bounds, userName: loggedInUserName ?? "사용자")
+        
         view = mainView
         
         setupActions()
@@ -29,6 +37,7 @@ class MainViewController: UIViewController {
         let alert = UIAlertController(title: "로그아웃", message: "로그아웃하시겠습니까?", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "예", style: .default, handler: { _ in
+            self.navigateToLoginViewController()
         }))
         
         alert.addAction(UIAlertAction(title: "아니오", style: .cancel, handler: nil))
@@ -72,5 +81,10 @@ class MainViewController: UIViewController {
             window.rootViewController = loginVC
             window.makeKeyAndVisible()
         }
+    }
+    
+    // This method is used to set the logged-in user's name
+    func setLoggedInUserName(_ name: String) {
+        loggedInUserName = name
     }
 }

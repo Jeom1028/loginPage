@@ -37,19 +37,23 @@ class CoreDataManager {
         user.name = name
         
         saveContext()
+        print("Created user: \(user.name ?? "No name")")
         return user
     }
-    
+
     func fetchUsers() -> [User] {
         let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
         
         do {
-            return try context.fetch(fetchRequest)
+            let users = try context.fetch(fetchRequest)
+            print("Fetched users: \(users.map { $0.name ?? "No name" })") 
+            return users
         } catch {
             print("Failed to fetch users: \(error)")
             return []
         }
     }
+
     
     func updateUser(user: User, newEmail: String?, newPassword: String?, newName: String?) {
         if let email = newEmail { user.email = email }
@@ -71,6 +75,7 @@ class CoreDataManager {
                 try context.save()
             } catch {
                 let nserror = error as NSError
+                print("Failed to save context: \(nserror.localizedDescription)")
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }

@@ -12,7 +12,6 @@ class MainView: UIView {
     
     let mainLabel: UILabel = {
         let label = UILabel()
-        label.text = "님 환영합니다"
         label.font = UIFont.boldSystemFont(ofSize: 40)
         label.textColor = .white
         return label
@@ -36,10 +35,11 @@ class MainView: UIView {
         return button
     }()
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, userName: String) {
         super.init(frame: frame)
         setupView()
         setupConstraints()
+        mainLabel.text = "\(userName)님 환영합니다"  // Set the user's name
     }
     
     required init?(coder: NSCoder) {
@@ -70,4 +70,3 @@ class MainView: UIView {
         }
     }
 }
-
