@@ -1,5 +1,5 @@
 //
-//  SignViewController.swift
+//  SignView.swift
 //  loginPage
 //
 //  Created by 점승현 on 11/9/24.
@@ -8,9 +8,9 @@
 import UIKit
 import SnapKit
 
-class SignViewController: UIViewController {
+class SignUpView: UIView {
     
-    private let emailLabel: UILabel = {
+    let emailLabel: UILabel = {
         let label = UILabel()
         label.text = "이메일"
         label.textColor = .white
@@ -18,7 +18,7 @@ class SignViewController: UIViewController {
         return label
     }()
     
-    private let emailTextField: UITextField = {
+    let emailTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "이메일을 입력하세요"
         textField.borderStyle = .roundedRect
@@ -26,7 +26,7 @@ class SignViewController: UIViewController {
         return textField
     }()
     
-    private let namelLabel: UILabel = {
+    let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "이름"
         label.textColor = .white
@@ -34,7 +34,7 @@ class SignViewController: UIViewController {
         return label
     }()
     
-    private let nameTextField: UITextField = {
+    let nameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "이름을 입력하세요"
         textField.borderStyle = .roundedRect
@@ -42,7 +42,7 @@ class SignViewController: UIViewController {
         return textField
     }()
     
-    private let idLabel: UILabel = {
+    let idLabel: UILabel = {
         let label = UILabel()
         label.text = "아이디"
         label.textColor = .white
@@ -50,7 +50,7 @@ class SignViewController: UIViewController {
         return label
     }()
     
-    private let idTextField: UITextField = {
+    let idTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "아이디를 입력하세요"
         textField.borderStyle = .roundedRect
@@ -58,7 +58,7 @@ class SignViewController: UIViewController {
         return textField
     }()
     
-    private let passWordLabel: UILabel = {
+    let passWordLabel: UILabel = {
         let label = UILabel()
         label.text = "비밀번호"
         label.textColor = .white
@@ -66,7 +66,7 @@ class SignViewController: UIViewController {
         return label
     }()
     
-    private let passWordTextField: UITextField = {
+    let passWordTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "비밀번호를 입력하세요"
         textField.borderStyle = .roundedRect
@@ -74,7 +74,7 @@ class SignViewController: UIViewController {
         return textField
     }()
     
-    private let signButton: UIButton = {
+    let signButton: UIButton = {
         let button = UIButton()
         button.setTitle("회원가입", for: .normal)
         button.backgroundColor = .red
@@ -83,22 +83,18 @@ class SignViewController: UIViewController {
         return button
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .black
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setupView()
         setupConstraints()
-        setupActions()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationItem.hidesBackButton = true
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func setupView() {
-        [emailLabel, emailTextField, idLabel, idTextField, namelLabel, nameTextField, passWordLabel, passWordTextField, signButton].forEach { view.addSubview($0) }
+        [emailLabel, emailTextField, idLabel, idTextField, nameLabel, nameTextField, passWordLabel, passWordTextField, signButton].forEach { addSubview($0) }
     }
     
     private func setupConstraints() {
@@ -124,7 +120,7 @@ class SignViewController: UIViewController {
             make.top.equalTo(idLabel.snp.bottom).offset(8)
         }
         
-        namelLabel.snp.makeConstraints { make in
+        nameLabel.snp.makeConstraints { make in
             make.height.equalTo(40)
             make.leading.trailing.equalToSuperview().inset(24)
             make.top.equalTo(idTextField.snp.bottom).offset(16)
@@ -133,7 +129,7 @@ class SignViewController: UIViewController {
         nameTextField.snp.makeConstraints { make in
             make.height.equalTo(40)
             make.leading.trailing.equalToSuperview().inset(24)
-            make.top.equalTo(namelLabel.snp.bottom).offset(8)
+            make.top.equalTo(nameLabel.snp.bottom).offset(8)
         }
         
         passWordLabel.snp.makeConstraints { make in
@@ -154,42 +150,5 @@ class SignViewController: UIViewController {
             make.top.equalTo(passWordTextField.snp.bottom).offset(60)
         }
     }
-    
-    private func setupActions() {
-        signButton.addTarget(self, action: #selector(signButtonTapped), for: .touchUpInside)
-    }
-    
-    @objc private func signButtonTapped() {
-        guard let email = emailTextField.text, !email.isEmpty,
-              let id = idTextField.text, !id.isEmpty,
-              let name = nameTextField.text, !name.isEmpty,
-              let password = passWordTextField.text, !password.isEmpty else {
-            showAlert(message: "모든 필드를 입력하세요.")
-            return
-        }
-        
-        // Save user using CoreDataManager
-        let newUser = CoreDataManager.shared.createUser(id: id, email: email, password: password, name: name)
-        
-        if newUser != nil {
-            showAlert(message: "회원가입이 완료되었습니다") { [weak self] in
-                self?.navigateToLoginViewController()
-            }
-        } else {
-            showAlert(message: "회원가입 실패. 다시 시도해 주세요.")
-        }
-    }
-    
-    private func showAlert(message: String, completion: (() -> Void)? = nil) {
-        let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "확인", style: .default) { _ in
-            completion?()
-        })
-        present(alert, animated: true, completion: nil)
-    }
-    
-    private func navigateToLoginViewController() {
-        let loginViewController = LoginViewController()
-        navigationController?.pushViewController(loginViewController, animated: true)
-    }
 }
+

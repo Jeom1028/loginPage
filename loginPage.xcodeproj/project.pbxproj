@@ -20,6 +20,10 @@
 		B74993872CDF537A00208826 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74993862CDF537A00208826 /* CoreDataManager.swift */; };
 		B74993892CDF5CCE00208826 /* StartPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74993882CDF5CCE00208826 /* StartPageController.swift */; };
 		B749938B2CDF62B500208826 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B749938A2CDF62B500208826 /* MainViewController.swift */; };
+		B74993902CDF671B00208826 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B749938F2CDF671B00208826 /* MainView.swift */; };
+		B74993922CDF672600208826 /* StartPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74993912CDF672600208826 /* StartPageView.swift */; };
+		B74993942CDF672F00208826 /* SignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74993932CDF672F00208826 /* SignView.swift */; };
+		B74993962CDF673900208826 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74993952CDF673900208826 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +41,10 @@
 		B74993862CDF537A00208826 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B74993882CDF5CCE00208826 /* StartPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPageController.swift; sourceTree = "<group>"; };
 		B749938A2CDF62B500208826 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		B749938F2CDF671B00208826 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		B74993912CDF672600208826 /* StartPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPageView.swift; sourceTree = "<group>"; };
+		B74993932CDF672F00208826 /* SignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignView.swift; sourceTree = "<group>"; };
+		B74993952CDF673900208826 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,16 +83,12 @@
 			children = (
 				B749938E2CDF661000208826 /* Controller */,
 				B749938D2CDF660900208826 /* View */,
-				B74993662CDF3DCD00208826 /* AppDelegate.swift */,
-				B74993682CDF3DCD00208826 /* SceneDelegate.swift */,
-				B749936A2CDF3DCD00208826 /* LoginViewController.swift */,
-				B74993802CDF428300208826 /* SignViewController.swift */,
-				B74993882CDF5CCE00208826 /* StartPageController.swift */,
-				B749938A2CDF62B500208826 /* MainViewController.swift */,
 				B749938C2CDF65EF00208826 /* Model */,
-				B74993722CDF3DCF00208826 /* Assets.xcassets */,
 				B74993742CDF3DCF00208826 /* LaunchScreen.storyboard */,
+				B74993682CDF3DCD00208826 /* SceneDelegate.swift */,
+				B74993662CDF3DCD00208826 /* AppDelegate.swift */,
 				B74993772CDF3DCF00208826 /* Info.plist */,
+				B74993722CDF3DCF00208826 /* Assets.xcassets */,
 				B749936F2CDF3DCD00208826 /* loginPage.xcdatamodeld */,
 			);
 			path = loginPage;
@@ -100,6 +104,10 @@
 		B749938D2CDF660900208826 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B749938F2CDF671B00208826 /* MainView.swift */,
+				B74993912CDF672600208826 /* StartPageView.swift */,
+				B74993932CDF672F00208826 /* SignView.swift */,
+				B74993952CDF673900208826 /* LoginView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -107,6 +115,10 @@
 		B749938E2CDF661000208826 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B749938A2CDF62B500208826 /* MainViewController.swift */,
+				B74993882CDF5CCE00208826 /* StartPageController.swift */,
+				B74993802CDF428300208826 /* SignViewController.swift */,
+				B749936A2CDF3DCD00208826 /* LoginViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -187,6 +199,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B74993922CDF672600208826 /* StartPageView.swift in Sources */,
 				B74993712CDF3DCD00208826 /* loginPage.xcdatamodeld in Sources */,
 				B749936B2CDF3DCD00208826 /* LoginViewController.swift in Sources */,
 				B74993812CDF428300208826 /* SignViewController.swift in Sources */,
@@ -194,6 +207,9 @@
 				B74993842CDF532400208826 /* User+CoreDataClass.swift in Sources */,
 				B74993852CDF532400208826 /* User+CoreDataProperties.swift in Sources */,
 				B74993872CDF537A00208826 /* CoreDataManager.swift in Sources */,
+				B74993962CDF673900208826 /* LoginView.swift in Sources */,
+				B74993902CDF671B00208826 /* MainView.swift in Sources */,
+				B74993942CDF672F00208826 /* SignView.swift in Sources */,
 				B74993892CDF5CCE00208826 /* StartPageController.swift in Sources */,
 				B74993692CDF3DCD00208826 /* SceneDelegate.swift in Sources */,
 				B749938B2CDF62B500208826 /* MainViewController.swift in Sources */,
