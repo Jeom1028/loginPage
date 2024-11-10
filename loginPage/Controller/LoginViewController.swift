@@ -10,7 +10,7 @@ import UIKit
 class LoginViewController: UIViewController {
     
     private var loginView: LoginView!
-    private var failedLoginAttempts = 0 // Track failed login attempts
+    private var failedLoginAttempts = 0 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +38,6 @@ class LoginViewController: UIViewController {
             return
         }
 
-        // Fetch the user with the given ID
         if let user = CoreDataManager.shared.fetchUser(byID: id), user.password == password {
             failedLoginAttempts = 0
             navigateToHomeViewController(withUserID: user.id ?? "")

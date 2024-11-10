@@ -11,9 +11,8 @@ import SnapKit
 class MainViewController: UIViewController {
     
     private var mainView: MainView!
-    var loggedInUserID: String? // ID of the logged-in user
+    var loggedInUserID: String? 
     
-    // Initialize with userID
     init(loggedInUserID: String?) {
         self.loggedInUserID = loggedInUserID
         super.init(nibName: nil, bundle: nil)
@@ -26,7 +25,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Fetch user by ID to get name
         if let userID = loggedInUserID {
             let user = CoreDataManager.shared.fetchUser(byID: userID)
             let userName = user?.name ?? "사용자"
