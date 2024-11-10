@@ -11,20 +11,31 @@ import SnapKit
 class MainViewController: UIViewController {
     
     private var mainView: MainView!
-    var loggedInUserName: String?
+    var loggedInUserID: String? // ID of the logged-in user
+    
+    // Initialize with userID
+    init(loggedInUserID: String?) {
+        self.loggedInUserID = loggedInUserID
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if loggedInUserName == nil {
-            let users = CoreDataManager.shared.fetchUsers()
-            loggedInUserName = users.first?.name ?? "사용자"
+        // Fetch user by ID to get name
+        if let userID = loggedInUserID {
+            let user = CoreDataManager.shared.fetchUser(byID: userID)
+            let userName = user?.name ?? "사용자"
+            mainView = MainView(frame: view.bounds, userName: userName)
+        } else {
+            mainView = MainView(frame: view.bounds, userName: "사용자")
         }
         
-        mainView = MainView(frame: view.bounds, userName: loggedInUserName ?? "사용자")
-        
         view = mainView
-        
         setupActions()
     }
     
@@ -58,13 +69,9 @@ class MainViewController: UIViewController {
     }
     
     private func deleteUserAndNavigateToStartPage() {
-        let users = CoreDataManager.shared.fetchUsers()
-        
-        if let currentUser = users.first {
-            CoreDataManager.shared.deleteUser(user: currentUser)
-            
-            navigateToStartPageController()
-        }
+        guard let userID = loggedInUserID else { return }
+        CoreDataManager.shared.deleteUser(withID: userID)
+        navigateToStartPageController()
     }
     
     private func navigateToStartPageController() {
@@ -81,10 +88,5 @@ class MainViewController: UIViewController {
             window.rootViewController = loginVC
             window.makeKeyAndVisible()
         }
-    }
-    
-    // This method is used to set the logged-in user's name
-    func setLoggedInUserName(_ name: String) {
-        loggedInUserName = name
     }
 }

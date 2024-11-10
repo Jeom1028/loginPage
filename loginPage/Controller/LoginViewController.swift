@@ -1,6 +1,6 @@
 //
-//  ViewController.swift
-//  login Page
+//  LoginViewController.swift
+//  loginPage
 //
 //  Created by 점승현 on 11/9/24.
 //
@@ -38,19 +38,12 @@ class LoginViewController: UIViewController {
             return
         }
 
-        let users = CoreDataManager.shared.fetchUsers()
-        
-        if let user = users.first(where: { $0.id == id && $0.password == password }) {
+        // Fetch the user with the given ID
+        if let user = CoreDataManager.shared.fetchUser(byID: id), user.password == password {
             failedLoginAttempts = 0
-            
-            if let mainVC = navigationController?.viewControllers.first(where: { $0 is MainViewController }) as? MainViewController {
-                mainVC.setLoggedInUserName(user.name ?? "사용자") 
-            }
-            
-            navigateToHomeViewController()
+            navigateToHomeViewController(withUserID: user.id ?? "")
         } else {
             failedLoginAttempts += 1
-            
             if failedLoginAttempts >= 3 {
                 showFailedLoginAlert()
             } else {
@@ -58,6 +51,7 @@ class LoginViewController: UIViewController {
             }
         }
     }
+    
 
     private func showAlert(message: String) {
         let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
@@ -78,23 +72,19 @@ class LoginViewController: UIViewController {
     }
     
     private func navigateToSignUpViewController() {
-        let signUpVC = SignViewController()
+         let signUpVC = SignViewController()
+         if let window = UIApplication.shared.windows.first {
+             window.rootViewController = signUpVC
+             window.makeKeyAndVisible()
+         }
+     }
+    
+    private func navigateToHomeViewController(withUserID userID: String) {
+        let homeViewController = MainViewController(loggedInUserID: userID)
+        
         if let window = UIApplication.shared.windows.first {
-            window.rootViewController = signUpVC
+            window.rootViewController = homeViewController
             window.makeKeyAndVisible()
         }
     }
-
-    private func navigateToHomeViewController() {
-        let homeViewController = MainViewController()
-        
-        if let navigationController = self.navigationController {
-            navigationController.pushViewController(homeViewController, animated: true)
-        } else {
-            if let window = UIApplication.shared.windows.first {
-                window.rootViewController = homeViewController
-                window.makeKeyAndVisible()
-            }
-        }
-    }
- }
+}

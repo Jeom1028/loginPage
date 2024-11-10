@@ -41,18 +41,18 @@ class CoreDataManager {
         return user
     }
 
-    func fetchUsers() -> [User] {
+    func fetchUser(byID id: String) -> User? {
         let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
         
         do {
-            let users = try context.fetch(fetchRequest)
-            print("Fetched users: \(users.map { $0.name ?? "No name" })") 
-            return users
+            return try context.fetch(fetchRequest).first
         } catch {
-            print("Failed to fetch users: \(error)")
-            return []
+            print("Failed to fetch user with ID \(id): \(error)")
+            return nil
         }
     }
+
 
     
     func updateUser(user: User, newEmail: String?, newPassword: String?, newName: String?) {
@@ -63,10 +63,22 @@ class CoreDataManager {
         saveContext()
     }
     
-    func deleteUser(user: User) {
-        context.delete(user)
-        saveContext()
+    func deleteUser(withID id: String) {
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+        
+        do {
+            let users = try context.fetch(fetchRequest)
+            if let userToDelete = users.first {
+                context.delete(userToDelete)
+                saveContext()
+                print("Deleted user: \(userToDelete.name ?? "No name")")
+            }
+        } catch {
+            print("Failed to delete user with ID \(id): \(error)")
+        }
     }
+
     
     // MARK: - SAVE
     func saveContext() {
