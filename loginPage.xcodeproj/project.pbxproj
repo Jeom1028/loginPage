@@ -83,7 +83,6 @@
 			children = (
 				B749938E2CDF661000208826 /* Controller */,
 				B749938D2CDF660900208826 /* View */,
-				B749938C2CDF65EF00208826 /* Model */,
 				B74993742CDF3DCF00208826 /* LaunchScreen.storyboard */,
 				B74993682CDF3DCD00208826 /* SceneDelegate.swift */,
 				B74993662CDF3DCD00208826 /* AppDelegate.swift */,
@@ -92,13 +91,6 @@
 				B749936F2CDF3DCD00208826 /* loginPage.xcdatamodeld */,
 			);
 			path = loginPage;
-			sourceTree = "<group>";
-		};
-		B749938C2CDF65EF00208826 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		B749938D2CDF660900208826 /* View */ = {

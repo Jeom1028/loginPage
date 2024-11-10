@@ -10,6 +10,7 @@ import UIKit
 class LoginViewController: UIViewController {
     
     private var loginView: LoginView!
+    private var failedLoginAttempts = 0 // Track failed login attempts
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,13 +41,21 @@ class LoginViewController: UIViewController {
         let users = CoreDataManager.shared.fetchUsers()
         
         if let user = users.first(where: { $0.id == id && $0.password == password }) {
+            failedLoginAttempts = 0
+            
             if let mainVC = navigationController?.viewControllers.first(where: { $0 is MainViewController }) as? MainViewController {
-                mainVC.setLoggedInUserName(user.name ?? "사용자") // Set the logged-in user's name
+                mainVC.setLoggedInUserName(user.name ?? "사용자") 
             }
             
             navigateToHomeViewController()
         } else {
-            showAlert(message: "아이디 또는 비밀번호가 잘못되었습니다.")
+            failedLoginAttempts += 1
+            
+            if failedLoginAttempts >= 3 {
+                showFailedLoginAlert()
+            } else {
+                showAlert(message: "아이디 또는 비밀번호가 잘못되었습니다.")
+            }
         }
     }
 
@@ -56,12 +65,36 @@ class LoginViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    private func navigateToHomeViewController() {
-        let homeViewController = MainViewController()
+    private func showFailedLoginAlert() {
+        let alert = UIAlertController(title: "로그인 실패", message: "아이디 또는 비밀번호가 잘못되었습니다. 3회 로그인 실패시 회원이 아니십니까?", preferredStyle: .alert)
         
+        alert.addAction(UIAlertAction(title: "예", style: .default, handler: { _ in
+            self.navigateToSignUpViewController()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "아니오", style: .cancel, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func navigateToSignUpViewController() {
+        let signUpVC = SignViewController()
         if let window = UIApplication.shared.windows.first {
-            window.rootViewController = MainViewController()
+            window.rootViewController = signUpVC
             window.makeKeyAndVisible()
         }
     }
-}
+
+    private func navigateToHomeViewController() {
+        let homeViewController = MainViewController()
+        
+        if let navigationController = self.navigationController {
+            navigationController.pushViewController(homeViewController, animated: true)
+        } else {
+            if let window = UIApplication.shared.windows.first {
+                window.rootViewController = homeViewController
+                window.makeKeyAndVisible()
+            }
+        }
+    }
+ }
