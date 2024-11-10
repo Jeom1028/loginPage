@@ -76,17 +76,23 @@ class MainViewController: UIViewController {
     
     private func navigateToStartPageController() {
         let startPageVC = StartPageController()
-        if let window = UIApplication.shared.windows.first {
+        
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
             window.rootViewController = startPageVC
             window.makeKeyAndVisible()
         }
     }
+
     
     private func navigateToLoginViewController() {
         let loginVC = LoginViewController()
-        if let window = UIApplication.shared.windows.first {
+        
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
             window.rootViewController = loginVC
             window.makeKeyAndVisible()
         }
     }
+
 }

@@ -29,23 +29,25 @@ class StartPageController: UIViewController {
         
         let memberAction = UIAlertAction(title: "회원", style: .default) { _ in
             let loginVC = LoginViewController()
-            if let window = UIApplication.shared.windows.first {
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let window = windowScene.windows.first {
                 window.rootViewController = loginVC
                 window.makeKeyAndVisible()
                 print("회원 선택됨")
             }
-
         }
         
         let nonMemberAction = UIAlertAction(title: "비회원", style: .default) { _ in
             let signVC = SignViewController()
-            if let window = UIApplication.shared.windows.first {
+
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let window = windowScene.windows.first {
                 window.rootViewController = signVC
                 window.makeKeyAndVisible()
                 print("비회원 선택됨")
             }
         }
-        
+
         alert.addAction(memberAction)
         alert.addAction(nonMemberAction)
         

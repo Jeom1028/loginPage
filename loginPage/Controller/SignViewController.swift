@@ -60,9 +60,12 @@ class SignViewController: UIViewController {
     
     private func navigateToLoginViewController() {
         let loginViewController = LoginViewController()
-        if let window = UIApplication.shared.windows.first {
+        
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
             window.rootViewController = loginViewController
             window.makeKeyAndVisible()
         }
     }
+
 }

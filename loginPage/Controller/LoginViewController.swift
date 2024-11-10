@@ -72,19 +72,24 @@ class LoginViewController: UIViewController {
     }
     
     private func navigateToSignUpViewController() {
-         let signUpVC = SignViewController()
-         if let window = UIApplication.shared.windows.first {
-             window.rootViewController = signUpVC
-             window.makeKeyAndVisible()
-         }
-     }
+        let signUpVC = SignViewController()
+        
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            window.rootViewController = signUpVC
+            window.makeKeyAndVisible()
+        }
+    }
+
     
     private func navigateToHomeViewController(withUserID userID: String) {
         let homeViewController = MainViewController(loggedInUserID: userID)
         
-        if let window = UIApplication.shared.windows.first {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
             window.rootViewController = homeViewController
             window.makeKeyAndVisible()
         }
     }
+
 }
