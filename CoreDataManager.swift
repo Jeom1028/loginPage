@@ -53,8 +53,6 @@ class CoreDataManager {
         }
     }
 
-
-    
     func updateUser(user: User, newEmail: String?, newPassword: String?, newName: String?) {
         if let email = newEmail { user.email = email }
         if let password = newPassword { user.password = password }
