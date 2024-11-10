@@ -62,9 +62,6 @@
 		B749935A2CDF3DCD00208826 = {
 			isa = PBXGroup;
 			children = (
-				B74993862CDF537A00208826 /* CoreDataManager.swift */,
-				B74993822CDF532400208826 /* User+CoreDataClass.swift */,
-				B74993832CDF532400208826 /* User+CoreDataProperties.swift */,
 				B74993652CDF3DCD00208826 /* loginPage */,
 				B74993642CDF3DCD00208826 /* Products */,
 			);
@@ -81,9 +78,11 @@
 		B74993652CDF3DCD00208826 /* loginPage */ = {
 			isa = PBXGroup;
 			children = (
+				B762223F2CE0A68500233B71 /* Model */,
 				B749938E2CDF661000208826 /* Controller */,
 				B749938D2CDF660900208826 /* View */,
 				B74993742CDF3DCF00208826 /* LaunchScreen.storyboard */,
+				B74993862CDF537A00208826 /* CoreDataManager.swift */,
 				B74993682CDF3DCD00208826 /* SceneDelegate.swift */,
 				B74993662CDF3DCD00208826 /* AppDelegate.swift */,
 				B74993772CDF3DCF00208826 /* Info.plist */,
@@ -113,6 +112,15 @@
 				B749936A2CDF3DCD00208826 /* LoginViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		B762223F2CE0A68500233B71 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B74993822CDF532400208826 /* User+CoreDataClass.swift */,
+				B74993832CDF532400208826 /* User+CoreDataProperties.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
