@@ -39,7 +39,7 @@ class MainView: UIView {
         super.init(frame: frame)
         setupView()
         setupConstraints()
-        mainLabel.text = "\(userName)님 환영합니다"  // Set the user's name
+        mainLabel.text = "\(userName)님 환영합니다"  
     }
     
     required init?(coder: NSCoder) {
